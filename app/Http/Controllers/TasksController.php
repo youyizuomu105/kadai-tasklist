@@ -32,11 +32,11 @@ class TasksController extends Controller
      */
     public function create()
     {
-         $tasks = new Task;
+         $task = new Task;
 
         // メッセージ作成ビューを表示
         return view('tasks.create', [
-            'tasks' => $tasks,
+            'tasks' => $task,
         ]);
     }
 
@@ -49,9 +49,12 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         // メッセージを作成
-        $tasks = new Task;
-        $tasks->content = $request->content;
-        $tasks->save();
+        $task = new Task;
+        $task->content = $request->content;
+        $task->status = $request->status;
+        $task->save();
+        
+        
 
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -66,11 +69,11 @@ class TasksController extends Controller
     public function show($id)
     {
           // idの値でメッセージを検索して取得
-        $tasks = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
 
         // メッセージ詳細ビューでそれを表示
         return view('tasks.show', [
-            'tasks' => $tasks,
+            'task' => $task,
         ]);
     }
 
@@ -83,11 +86,11 @@ class TasksController extends Controller
     public function edit($id)
     {
         // idの値でメッセージを検索して取得
-        $tasks = Tasks::findOrFail($id);
+        $task = Task::findOrFail($id);
 
         // メッセージ編集ビューでそれを表示
         return view('tasks.edit', [
-            'tasks' => $tasks,
+            'task' => $task,
         ]);
     }
 
@@ -101,10 +104,11 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         // idの値でメッセージを検索して取得
-        $tasks = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
         // メッセージを更新
-        $tasks->content = $request->content;
-        $tasks->save();
+        $task->content = $request->content;
+        $task->status = $request->status;
+        $task->save();
 
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -119,7 +123,7 @@ class TasksController extends Controller
     public function destroy($id)
     {
          // idの値でメッセージを検索して取得
-        $tasks = tasks::findOrFail($id);
+        $tasks = task::findOrFail($id);
         // メッセージを削除
         $tasks->delete();
 
