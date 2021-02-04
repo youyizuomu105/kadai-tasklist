@@ -8,8 +8,8 @@
     </head>
 
     <body>
-        {{-- ナビゲーションバー --}}
-
+ {{-- ナビゲーションバー --}}
+        @include('commons.navbar')
 
         <div class="container">
             {{-- エラーメッセージ --}}
